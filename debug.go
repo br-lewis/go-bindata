@@ -68,7 +68,7 @@ func writeDebugAsset(w io.Writer, c *Config, asset *Asset) error {
 func %s() (*asset, error) {
 	wd, err := os.Getwd()
 	if err != nil {
-		return err
+		return nil, err
 	}
 	path := %s
 	name := %q
