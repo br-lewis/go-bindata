@@ -61,11 +61,15 @@ type asset struct {
 func writeDebugAsset(w io.Writer, c *Config, asset *Asset) error {
 	pathExpr := fmt.Sprintf("%q", asset.Path)
 	if c.Dev {
-		pathExpr = fmt.Sprintf("filepath.Join(rootDir, %q)", asset.Name)
+		pathExpr = fmt.Sprintf("filepath.Join(wd, %q, %q)", c.Prefix, asset.Name)
 	}
 
 	_, err := fmt.Fprintf(w, `// %s reads file data from disk. It returns an error on failure.
 func %s() (*asset, error) {
+	wd, err := os.Getwd()
+	if err != nil {
+		return err
+	}
 	path := %s
 	name := %q
 	bytes, err := bindataRead(path, name)

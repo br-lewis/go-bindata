@@ -119,9 +119,10 @@ type Config struct {
 
 	// Perform a dev build, which is nearly identical to the debug option. The
 	// only difference is that instead of absolute file paths in generated code,
-	// it expects a variable, `rootDir`, to be set in the generated code's
-	// package (the author needs to do this manually), which it then prepends to
-	// an asset's name to construct the file path on disk.
+	// it expects the directory structure to be available from the current
+	// working directory i.e. it expects to the current working directory
+	// to be the one that hold the generating file, or for the included item
+	// directory structure to be mirrored in the current directory.
 	//
 	// This is mainly so you can push the generated code file to a shared
 	// repository.
